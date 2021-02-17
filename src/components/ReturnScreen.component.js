@@ -60,10 +60,18 @@ export default class ReturnBookScreen extends Component{
 
         console.log(book);
 
-        axios.post('https://imelibrary.herokuapp.com/books/return/'+this.props.match.params.id,book)
-        .then(res=>console.log(res.data));
+        const returnBookPost=async()=>{
+            try {
+                const resp = await axios.post('https://imelibrary.herokuapp.com/books/return/'+this.props.match.params.id,book);
+                console.log(resp.data);
+                
+                window.location='/';
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-        window.location='/';
+        returnBookPost();
     }
     
     render(){
