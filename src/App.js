@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import Navbar from "./components/navbar.component";
+import HomeScreen from "./components/HomeScreen.component";
+import CreateBookScreen from "./components/CreateBookScreen.component";
+import BorrowScreen from "./components/BorrowScreen.component";
+import ReturnScreen from "./components/ReturnScreen.component";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+        <Navbar/>
+        <br/>
+        <Route path="/" exact component={HomeScreen}/>
+        <Route path="/createbook" component={CreateBookScreen}/>
+        <Route path="/borrow/:id" component={BorrowScreen}/>
+        <Route path="/return/:id" component={ReturnScreen}/>
+      </div>
+    </Router>
   );
 }
 
