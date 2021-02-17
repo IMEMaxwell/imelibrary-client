@@ -57,10 +57,18 @@ export default class CreateBookScreen extends Component{
 
         console.log(book);
 
-        axios.post('https://imelibrary.herokuapp.com/books/add',book)
-        .then(res=>console.log(res.data));
+        const createBookPost=async()=>{
+            try {
+                const resp=await axios.post('https://imelibrary.herokuapp.com/books/add',book);
+                console.log(resp.data);
 
-        window.location='/';
+                window.location='/';
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        createBookPost();
     }
     
     render(){
