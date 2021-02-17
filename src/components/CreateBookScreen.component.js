@@ -17,7 +17,8 @@ export default class CreateBookScreen extends Component{
             bookname:'',
             qty:0,
             totalqty:0,
-            date: new Date()
+            date: new Date(),
+            disabled:false
         }
     }
 
@@ -58,6 +59,7 @@ export default class CreateBookScreen extends Component{
         console.log(book);
 
         const createBookPost=async()=>{
+            this.setState({disabled:true});
             try {
                 const resp=await axios.post('https://imelibrary.herokuapp.com/books/add',book);
                 console.log(resp.data);
@@ -65,6 +67,8 @@ export default class CreateBookScreen extends Component{
                 window.location='/';
             } catch (error) {
                 console.error(error);
+            } finally {
+                this.setState({disabled:false});
             }
         };
 
@@ -114,7 +118,7 @@ export default class CreateBookScreen extends Component{
               </div>
       
               <div className="form-group">
-                <input type="submit" value="Create New Book" className="btn btn-primary" />
+                <input type="submit" disabled={this.state.disabled} value="Create New Book" className="btn btn-primary" />
               </div>
             </form>
           </div>

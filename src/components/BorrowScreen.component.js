@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{Component,useState} from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
@@ -15,7 +15,8 @@ export default class BorrowBookScreen extends Component{
         this.state={
             bookname:'',
             borrowedby:'',
-            date: new Date()
+            date: new Date(),
+            disabled:false
         }
     }
 
@@ -60,8 +61,9 @@ export default class BorrowBookScreen extends Component{
         }
 
         console.log(book);
-
+        
         const borrowBookPost=async()=>{
+            this.setState({disabled:true});
             try {
                 const resp = await axios.post('https://imelibrary.herokuapp.com/books/borrow/'+this.props.match.params.id,book);
                 console.log(resp.data);
@@ -69,6 +71,8 @@ export default class BorrowBookScreen extends Component{
                 window.location='/';
             } catch (error) {
                 console.error(error);
+            } finally {
+                this.setState({disabled:false});
             }
         };
 
@@ -132,7 +136,8 @@ export default class BorrowBookScreen extends Component{
               </div>
       
               <div className="form-group">
-                <input type="submit" value="Borrow Book" className="btn btn-primary" />
+                <input type="submit" disabled={this.state.disabled} value="Borrow Book" className="btn btn-primary">
+                </input>
               </div>
             </form>
           </div>

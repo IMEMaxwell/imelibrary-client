@@ -16,7 +16,8 @@ export default class ReturnBookScreen extends Component{
             bookname:'',
             borrowedby:'',
             date: new Date(),
-            users:[]
+            users:[],
+            disabled:false
         }
     }
 
@@ -64,6 +65,7 @@ export default class ReturnBookScreen extends Component{
         console.log(book);
 
         const returnBookPost=async()=>{
+            this.setState({disabled:true});
             try {
                 const resp = await axios.post('https://imelibrary.herokuapp.com/books/return/'+this.props.match.params.id,book);
                 console.log(resp.data);
@@ -71,6 +73,8 @@ export default class ReturnBookScreen extends Component{
                 window.location='/';
             } catch (error) {
                 console.error(error);
+            } finally {
+                this.setState({disabled:false});
             }
         };
 
@@ -124,7 +128,7 @@ export default class ReturnBookScreen extends Component{
               </div>
       
               <div className="form-group">
-                <input type="submit" value="Return Book" className="btn btn-primary" />
+                <input type="submit" disabled={this.state.disabled} value="Return Book" className="btn btn-primary" />
               </div>
             </form>
           </div>
