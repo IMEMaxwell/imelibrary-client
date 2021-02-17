@@ -64,14 +64,14 @@ export default class BorrowBookScreen extends Component{
             try {
                 const resp = await axios.post('https://imelibrary.herokuapp.com/books/borrow/'+this.props.match.params.id,book);
                 console.log(resp.data);
+
+                window.location='/';
             } catch (error) {
                 console.error(error);
             }
         };
 
         borrowBookPost();
-
-        window.location='/';
     }
     
     render(){
