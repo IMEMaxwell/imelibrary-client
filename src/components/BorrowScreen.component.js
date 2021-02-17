@@ -24,6 +24,7 @@ export default class BorrowBookScreen extends Component{
         .then(response=>{
             this.setState({
                 bookname: response.data.bookname,
+                borrowedby:'Adelina'
             })
         })
         .catch(function(error){
@@ -97,13 +98,25 @@ export default class BorrowBookScreen extends Component{
                     required
                     value={this.state.borrowedby}
                     onChange={this.onChangeBorrowedby}>
-                    <option value="Maxwell">Maxwell</option>
-                    <option value="Hidayah">Hidayah</option>
+                    <option value="Adelina">Adelina</option>
                     <option value="Eka">Eka</option>
-                    <option value="Ng">Ng</option>
-                    <option value="Kit Hong">Kit Hong</option>
-                    <option value="Yoke Ling">Yoke Ling</option>
+                    <option value="Fariz">Fariz</option>
                     <option value="Farra">Farra</option>
+                    <option value="Hashidee">Hashidee</option>
+                    <option value="Hidayah">Hidayah</option>
+                    <option value="Izzat">Izzat</option>
+                    <option value="Jessie">Jessie</option>
+                    <option value="John">John</option>
+                    <option value="Kit Hong">Kit Hong</option>
+                    <option value="Maxwell">Maxwell</option>
+                    <option value="Nasruddin">Nasruddin</option>
+                    <option value="Ng">Ng</option>
+                    <option value="Shamsul">Shamsul</option>
+                    <option value="Shane">Shane</option>
+                    <option value="SK">SK</option>
+                    <option value="Syaiful">Syaiful</option>
+                    <option value="Yew Kay">Yew Kay</option>
+                    <option value="Yoke Ling">Yoke Ling</option>
                 </select>
                 </div>
               </div>

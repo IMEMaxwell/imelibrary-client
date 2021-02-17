@@ -3,12 +3,13 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const Book=props=>(
+
     <tr>
         <td>{props.book.bookname}</td>
         <td>{props.book.qty} / {props.book.totalqty}</td>
         <td>{props.book.borrowedby.join(", ")}</td>
         <td>
-        <Link to={"/borrow/"+props.book._id}>Borrow</Link> | <Link to={"/return/"+props.book._id}>Return</Link>
+            {props.book.qty!==0 && <Link to={"/borrow/"+props.book._id}>Borrow</Link>} | {props.book.totalqty>props.book.qty && <Link to={"/return/"+props.book._id}>Return</Link>}
         </td>
     </tr>
 )

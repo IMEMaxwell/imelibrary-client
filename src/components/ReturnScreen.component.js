@@ -15,7 +15,8 @@ export default class ReturnBookScreen extends Component{
         this.state={
             bookname:'',
             borrowedby:'',
-            date: new Date()
+            date: new Date(),
+            users:[]
         }
     }
 
@@ -23,7 +24,9 @@ export default class ReturnBookScreen extends Component{
         axios.get('https://imelibrary.herokuapp.com/books/'+this.props.match.params.id)
         .then(response=>{
             this.setState({
-                bookname: response.data.bookname
+                bookname: response.data.bookname,
+                users:response.data.borrowedby,
+                borrowedby:response.data.borrowedby[0]
             })
         })
         .catch(function(error){
@@ -95,15 +98,17 @@ export default class ReturnBookScreen extends Component{
                 <div>
                 <select
                     required
+                    className="form-control"
                     value={this.state.borrowedby}
                     onChange={this.onChangeBorrowedby}>
-                    <option value="Maxwell">Maxwell</option>
-                    <option value="Hidayah">Hidayah</option>
-                    <option value="Eka">Eka</option>
-                    <option value="Ng">Ng</option>
-                    <option value="Kit Hong">Kit Hong</option>
-                    <option value="Yoke Ling">Yoke Ling</option>
-                    <option value="Farra">Farra</option>
+                    {
+                        this.state.users.map(function(user){
+                            return <option
+                                key={user}
+                                value={user}>{user}
+                            </option>;
+                        })
+                    }
                 </select>
                 </div>
               </div>
