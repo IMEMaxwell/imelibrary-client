@@ -78,7 +78,7 @@ export default class EditBookScreen extends Component{
                 const resp=await axios.post('https://imelibrary.herokuapp.com/books/edit/'+this.props.match.params.id,book);
                 console.log(resp.data);
 
-                window.location='/';
+                window.location='/manage-book';
             } catch (error) {
                 console.error(error);
             } finally {

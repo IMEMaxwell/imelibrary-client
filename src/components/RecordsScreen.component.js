@@ -29,9 +29,11 @@ export default class RecordsScreen extends Component{
     }
 
     recordList(){
-        return this.state.records.map(currentrecord=>{
+        return this.state.records
+        .map(currentrecord=>{
             return <Record record={currentrecord} key={currentrecord._id}/>
         })
+        .sort((a,b)=>new Date(b.props.record.createdAt)-new Date(a.props.record.createdAt))
     }
 
     render(){
@@ -48,7 +50,7 @@ export default class RecordsScreen extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                    { this.recordList() }
+                    { this.recordList()}
                 </tbody>
                 </table>
             </div>
