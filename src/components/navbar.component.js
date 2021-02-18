@@ -11,10 +11,10 @@ export default class Navbar extends Component{
                 <li className="navbar-item">
                 <Link to="/createbook" className="nav-link">Create Book</Link>
                 </li>
-                <li>
+                <li classname="navbar-item">
                 <Link to="/records-list" className="nav-link">Records</Link>
                 </li>
-                <li>
+                <li classname="navbar-item">
                 <Link to="/manage-book" className="nav-link">Manage Book</Link>
                 </li>
                 </ul>

@@ -40,9 +40,11 @@ export default class HomeScreen extends Component{
     }
 
     bookList(){
-        return this.state.books.map(currentbook=>{
+        return this.state.books
+        .map(currentbook=>{
             return <Book book={currentbook} deleteBook={this.deleteBook} key={currentbook._id}/>
         })
+        .sort((a,b)=>a.props.book.bookname.localeCompare(b.props.book.bookname))
     }
 
     render(){
