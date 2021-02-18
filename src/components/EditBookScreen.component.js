@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css"
 
-export default class CreateBookScreen extends Component{
+export default class EditBookScreen extends Component{
     constructor(props){
         super(props);
 
@@ -19,6 +19,21 @@ export default class CreateBookScreen extends Component{
             imageurl:'',
             disabled:false
         }
+    }
+
+    componentDidMount(){
+        axios.get('https://imelibrary.herokuapp.com/books/'+this.props.match.params.id)
+        .then(response=>{
+            this.setState({
+                bookname:response.data.bookname,
+                qty:response.data.qty,
+                totalqty:response.data.totalqty,
+                imageurl:response.data.imageurl,
+            })
+        })
+        .catch(function(error){
+            console.log(error);
+        })
     }
 
     onChangeBookname(e){
@@ -60,7 +75,7 @@ export default class CreateBookScreen extends Component{
         const createBookPost=async()=>{
             this.setState({disabled:true});
             try {
-                const resp=await axios.post('https://imelibrary.herokuapp.com/books/add',book);
+                const resp=await axios.post('https://imelibrary.herokuapp.com/books/edit/'+this.props.match.params.id,book);
                 console.log(resp.data);
 
                 window.location='/';
@@ -77,7 +92,7 @@ export default class CreateBookScreen extends Component{
     render(){
         return(
             <div>
-            <h3>Create New Book</h3>
+            <h3>Edit Book</h3>
             <form onSubmit={this.onSubmit}>
               <div className="form-group"> 
                 <label>Bookname: </label>
@@ -122,7 +137,7 @@ export default class CreateBookScreen extends Component{
                   />
               </div>      
               <div className="form-group">
-                <input type="submit" disabled={this.state.disabled} value="Create New Book" className="btn btn-primary" />
+                <input type="submit" disabled={this.state.disabled} value="Edit Book" className="btn btn-primary" />
               </div>
             </form>
           </div>

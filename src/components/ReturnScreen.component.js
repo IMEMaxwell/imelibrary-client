@@ -1,21 +1,18 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css"
 
 export default class ReturnBookScreen extends Component{
     constructor(props){
         super(props);
 
-        this.onChangeBookname=this.onChangeBookname.bind(this);
         this.onChangeBorrowedby=this.onChangeBorrowedby.bind(this);
-        this.onChangeDate=this.onChangeDate.bind(this);
         this.onSubmit=this.onSubmit.bind(this);
 
         this.state={
             bookname:'',
             borrowedby:'',
-            date: new Date(),
+            imageurl:'',    //210218 added imageurl
             users:[],
             disabled:false
         }
@@ -26,6 +23,7 @@ export default class ReturnBookScreen extends Component{
         .then(response=>{
             this.setState({
                 bookname: response.data.bookname,
+                imageurl: response.data.imageurl,   //210218 added imageurl
                 users:response.data.borrowedby,
                 borrowedby:response.data.borrowedby[0]
             })
@@ -35,22 +33,10 @@ export default class ReturnBookScreen extends Component{
         })
     }
 
-    onChangeBookname(e){
-        this.setState({
-            bookname:e.target.value
-        });
-    }
-
     onChangeBorrowedby(e){
         this.setState({
             borrowedby:e.target.value
         })
-    }
-
-    onChangeDate(date){
-        this.setState({
-            date:date
-        });
     }
 
     onSubmit(e){
@@ -59,16 +45,25 @@ export default class ReturnBookScreen extends Component{
         const book ={
             bookname:this.state.bookname,
             borrowedby:this.state.borrowedby,
-            date:this.state.date,
+        }
+
+        //210218 Added record
+        const record ={
+            username:this.state.borrowedby,
+            bookname:this.state.bookname,
+            action:'Return'
         }
 
         console.log(book);
+        console.log(record);         //210218 Added record
 
         const returnBookPost=async()=>{
             this.setState({disabled:true});
             try {
                 const resp = await axios.post('https://imelibrary.herokuapp.com/books/return/'+this.props.match.params.id,book);
+                const resp2 = await axios.post('https://imelibrary.herokuapp.com/records/add',record);         //210218 Added record
                 console.log(resp.data);
+                console.log(resp2.data);         //210218 Added record
                 
                 window.location='/';
             } catch (error) {
@@ -96,6 +91,12 @@ export default class ReturnBookScreen extends Component{
                     onChange={this.onChangeBookname}
                     />
               </div>
+              <div>
+                  <img
+                    src={this.state.imageurl}
+                    alt={this.state.bookname} 
+                  />
+              </div>
 
               <div className="form-group">
                 <label>Borrowed By: </label>
@@ -114,16 +115,6 @@ export default class ReturnBookScreen extends Component{
                         })
                     }
                 </select>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>Date: </label>
-                <div>
-                  <DatePicker
-                    selected={this.state.date}
-                    onChange={this.onChangeDate}
-                  />
                 </div>
               </div>
       
