@@ -7,7 +7,7 @@ const Record=props=>(
         <td>{props.record.username}</td>
         <td>{props.record.bookname}</td>
         <td>{props.record.action}</td>
-        <td>{new Date(props.record.createdAt).toLocaleDateString("en-US")}</td>
+        <td>{new Date(props.record.createdAt).toLocaleDateString("en-GB",{day:'numeric',month:'short',year:'numeric'})}</td>
         <td>{new Date(props.record.createdAt).toLocaleTimeString("en-US")}</td>
     </tr>
 )
