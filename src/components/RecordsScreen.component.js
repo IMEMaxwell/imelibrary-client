@@ -7,8 +7,8 @@ const Record=props=>(
         <td>{props.record.username}</td>
         <td>{props.record.bookname}</td>
         <td>{props.record.action}</td>
-        <td>{props.record.createdAt.substring(0,10)}</td>
-        <td>{props.record.createdAt.substring(11,19)}</td>
+        <td>{new Date(props.record.createdAt).toLocaleDateString("en-US")}</td>
+        <td>{new Date(props.record.createdAt).toLocaleTimeString("en-US")}</td>
     </tr>
 )
 
@@ -47,8 +47,8 @@ export default class RecordsScreen extends Component{
                     <th>Username</th>
                     <th>Bookname</th>
                     <th>Action</th>
-                    <th>Date(UTC)</th>
-                    <th>Time(UTC)</th>
+                    <th>Date</th>
+                    <th>Time</th>
                     </tr>
                 </thead>
                 <tbody>
