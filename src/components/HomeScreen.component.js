@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import serverPath from '../doc/variables';
 
 const Book=props=>(
 
@@ -22,7 +23,7 @@ export default class HomeScreen extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://imelibrary.herokuapp.com/books/')
+        axios.get(serverPath+'/books/')
         .then(response=>{
             this.setState({books:response.data});
         })

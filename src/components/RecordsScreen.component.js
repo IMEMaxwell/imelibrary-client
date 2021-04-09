@@ -1,6 +1,7 @@
 //210218 Added Records Screen
 import React,{Component} from 'react';
 import axios from 'axios';
+import serverPath from '../doc/variables';
 
 const Record=props=>(
     <tr>
@@ -20,7 +21,7 @@ export default class RecordsScreen extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://imelibrary.herokuapp.com/records/')
+        axios.get(serverPath+'/records/')
         .then(response=>{
             this.setState({records:response.data});
         })

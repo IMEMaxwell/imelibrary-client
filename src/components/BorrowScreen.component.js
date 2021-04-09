@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
+import serverPath from '../doc/variables';
 
 export default class BorrowBookScreen extends Component{
     constructor(props){
@@ -18,7 +19,7 @@ export default class BorrowBookScreen extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://imelibrary.herokuapp.com/books/'+this.props.match.params.id)
+        axios.get(serverPath+'/books/'+this.props.match.params.id)
         .then(response=>{
             this.setState({
                 bookname: response.data.bookname,
@@ -58,8 +59,8 @@ export default class BorrowBookScreen extends Component{
         const borrowBookPost=async()=>{
             this.setState({disabled:true});
             try {
-                const resp = await axios.post('https://imelibrary.herokuapp.com/books/borrow/'+this.props.match.params.id,book);
-                const resp2 = await axios.post('https://imelibrary.herokuapp.com/records/add',record);         //210218 Added record
+                const resp = await axios.post(serverPath+'/books/borrow/'+this.props.match.params.id,book);
+                const resp2 = await axios.post(serverPath+'/records/add',record);         //210218 Added record
                 console.log(resp.data);
                 console.log(resp2.data);         //210218 Added record
 
@@ -114,6 +115,7 @@ export default class BorrowBookScreen extends Component{
                     <option value="John">John</option>
                     <option value="Kit Hong">Kit Hong</option>
                     <option value="Maxwell">Maxwell</option>
+                    <option value="Ming Zhao">Ming Zhao</option>
                     <option value="Nasruddin">Nasruddin</option>
                     <option value="Ng">Ng</option>
                     <option value="Shamsul">Shamsul</option>

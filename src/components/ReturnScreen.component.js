@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
+import serverPath from '../doc/variables';
 
 export default class ReturnBookScreen extends Component{
     constructor(props){
@@ -19,7 +20,7 @@ export default class ReturnBookScreen extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://imelibrary.herokuapp.com/books/'+this.props.match.params.id)
+        axios.get(serverPath+'/books/'+this.props.match.params.id)
         .then(response=>{
             this.setState({
                 bookname: response.data.bookname,
@@ -60,8 +61,8 @@ export default class ReturnBookScreen extends Component{
         const returnBookPost=async()=>{
             this.setState({disabled:true});
             try {
-                const resp = await axios.post('https://imelibrary.herokuapp.com/books/return/'+this.props.match.params.id,book);
-                const resp2 = await axios.post('https://imelibrary.herokuapp.com/records/add',record);         //210218 Added record
+                const resp = await axios.post(serverPath+'/books/return/'+this.props.match.params.id,book);
+                const resp2 = await axios.post(serverPath+'/records/add',record);         //210218 Added record
                 console.log(resp.data);
                 console.log(resp2.data);         //210218 Added record
                 

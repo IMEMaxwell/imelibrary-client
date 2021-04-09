@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
+import serverPath from '../doc/variables';
 
 export default class CreateBookScreen extends Component{
     constructor(props){
@@ -60,7 +61,7 @@ export default class CreateBookScreen extends Component{
         const createBookPost=async()=>{
             this.setState({disabled:true});
             try {
-                const resp=await axios.post('https://imelibrary.herokuapp.com/books/add',book);
+                const resp=await axios.post(serverPath+'/books/add',book);
                 console.log(resp.data);
 
                 window.location='/';

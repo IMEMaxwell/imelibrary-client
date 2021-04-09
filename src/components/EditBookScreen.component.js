@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import axios from 'axios';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
+import serverPath from '../doc/variables';
 
 export default class EditBookScreen extends Component{
     constructor(props){
@@ -22,7 +23,7 @@ export default class EditBookScreen extends Component{
     }
 
     componentDidMount(){
-        axios.get('https://imelibrary.herokuapp.com/books/'+this.props.match.params.id)
+        axios.get(serverPath+'/books/'+this.props.match.params.id)
         .then(response=>{
             this.setState({
                 bookname:response.data.bookname,
@@ -75,7 +76,7 @@ export default class EditBookScreen extends Component{
         const createBookPost=async()=>{
             this.setState({disabled:true});
             try {
-                const resp=await axios.post('https://imelibrary.herokuapp.com/books/edit/'+this.props.match.params.id,book);
+                const resp=await axios.post(serverPath+'/books/edit/'+this.props.match.params.id,book);
                 console.log(resp.data);
 
                 window.location='/manage-book';
