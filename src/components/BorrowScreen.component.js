@@ -116,6 +116,7 @@ export default class BorrowBookScreen extends Component{
                     <option value="John">John</option>
                     <option value="Kit Hong">Kit Hong</option>
                     <option value="Maxwell">Maxwell</option>
+                    <option value="May Sheen">May Sheen</option>
                     <option value="Ming Zhao">Ming Zhao</option>
                     <option value="Nasruddin">Nasruddin</option>
                     <option value="Ng">Ng</option>
