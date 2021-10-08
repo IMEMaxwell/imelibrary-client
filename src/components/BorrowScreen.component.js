@@ -106,6 +106,7 @@ export default class BorrowBookScreen extends Component{
                     onChange={this.onChangeBorrowedby}>
                     <option value="Adelina">Adelina</option>
                     <option value="Alex Wong">Alex Wong</option>
+                    <option value="Azhar">Azhar</option>
                     <option value="Eka">Eka</option>
                     <option value="Fariz">Fariz</option>
                     <option value="Farra">Farra</option>
