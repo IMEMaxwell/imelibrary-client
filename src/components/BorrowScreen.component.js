@@ -115,7 +115,6 @@ export default class BorrowBookScreen extends Component {
                 <option value="Hashidee">Hashidee</option>
                 <option value="Izzat">Izzat</option>
                 <option value="Jessie">Jessie</option>
-                <option value="Kit Hong">Kit Hong</option>
                 <option value="Maxwell">Maxwell</option>
                 <option value="May Sheen">May Sheen</option>
                 <option value="Ming Zhao">Ming Zhao</option>
@@ -128,7 +127,6 @@ export default class BorrowBookScreen extends Component {
                 <option value="SK">SK</option>
                 <option value="Syaiful">Syaiful</option>
                 <option value="Yew Kay">Yew Kay</option>
-                <option value="Yoke Ling">Yoke Ling</option>
               </select>
             </div>
           </div>
